@@ -16,36 +16,63 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+window.onload = function () {
+    var seconds = document.getElementById("secondsDD");
+    var minutes = document.getElementById("minutesDD");
+    var hours = document.getElementById("hoursDD");
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    for (var i = 0; i < 60; i++) {
+        var optionNumberSeconds = document.createElement("option");
+        optionNumberSeconds.text = i;
+        optionNumberSeconds.value = i;
+        seconds.add(optionNumberSeconds);
 
-        console.log('Received Event: ' + id);
+        var optionNumberMinutes = document.createElement("option");
+        optionNumberMinutes.text = i;
+        optionNumberMinutes.value = i;
+        minutes.add(optionNumberMinutes);
+
+        var optionNumberHours = document.createElement("option");
+        optionNumberHours.text = i;
+        optionNumberHours.value = i;
+        hours.add(optionNumberHours);
     }
-};
+}
 
-app.initialize();
+var globalSeconds = 0;
+
+function calculateTime(operation) {
+    var seconds = document.getElementById("secondsDD").value;
+    var minutes = document.getElementById("minutesDD").value * 60;
+    var hours = (document.getElementById("hoursDD").value * 60) * 60;
+    var operator = "+";
+    var globalHolder = globalSeconds;
+
+    if (operation === "add"){
+        globalHolder += (+seconds) + (+minutes) + (+hours);
+    } else{
+        globalHolder -= ((+seconds) + (+minutes) + (+hours));
+        operator = "-"
+    }
+    
+    if(globalHolder < 0){
+        alert("No such thing as negative time!");
+    }else{
+        globalSeconds = globalHolder;
+        var totalSeconds = globalSeconds % 60;
+        var totalHours = Math.floor(globalSeconds / 3600);
+        var totalMinutes = (globalSeconds - totalSeconds - (totalHours * 3600) ) / 60;
+
+        document.getElementById("totalHours").textContent = totalHours;
+        document.getElementById("totalMinutes").textContent = totalMinutes;
+        document.getElementById("totalSeconds").textContent = totalSeconds;
+
+        var timeString = '<p>' + operator + ' ' + document.getElementById("hoursDD").value + 'hrs : ' + document.getElementById("minutesDD").value + 'mins : ' + document.getElementById("secondsDD").value + 'secs</p>';
+        document.getElementById("previousInputs").innerHTML += timeString;
+    }
+    document.getElementById("secondsDD").value = 0;
+    document.getElementById("minutesDD").value = 0;
+    document.getElementById("hoursDD").value = 0;
+    
+
+};
