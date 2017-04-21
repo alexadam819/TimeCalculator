@@ -1,82 +1,41 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-
 <head>
-    <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <!-- load MUI -->
-    <link href="https://cdn.muicss.com/mui-0.9.15/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://cdn.muicss.com/mui-0.9.15/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script> -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">      
     <link href="./css/index.css" rel="stylesheet" type="text/css" />
     <title>Time Calculator</title>
 </head>
 <body>
-    <div class="mui-container-fluid">
-        <div class="mui-row">
-            <div class="mui-appbar">
-                <p class="appbar-heading">Time Calculator</p>
+    <div class="container">
+        <div class="row">
+            <div class="input-field col s4">
+                <input type="number" id="hoursDD">
+                <label for="hours">Hours:</label>
             </div>
-            <div class="mui-form">
-                <div class="mui-col-sm-4">
-                    <div class="mui-textfield mui-textfield--float-label">
-                        <input type="number" id="hoursDD">
-                        <label for="hours">Hours:</label>
-                        <!--<select name="hours" id="hoursDD" class="form-control"></select>-->
-                    </div>
-                </div>
-                <div class="mui-col-sm-4">
-                    <div class="mui-textfield mui-textfield--float-label">
-                        <input type="number" id="minutesDD">
-                        <label for="minutes">Minutes:</label>
-                        <!--<select name="minutes" id="minutesDD" class="form-control"></select>-->
-                    </div>
-                </div>
-                <div class="mui-col-sm-4">
-                    <div class="mui-textfield mui-textfield--float-label">
-                        <input type="number" id="secondsDD">
-                        <label for="seconds">Seconds:</label>
-                        <!--<select name="seconds" id="secondsDD" class="form-control"></select>-->
-                    </div>
+            <div class="input-field col s4">
+                <input type="number" id="minutesDD">
+                <label for="minutes">Minutes:</label>
+            </div>
+            <div class="input-field col s4">
+                <input type="number" id="secondsDD">
+                <label for="seconds">Seconds:</label>
+            </div>
+            <div class="row">
+                <div class="col m12 ">
+                    <a class="btn-floating btn-large waves-effect waves-light blue" onclick="calculateTime('add')"><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn-large waves-effect waves-light red" onclick="calculateTime('subtract')"><i class="material-icons">subtract</i></a>
                 </div>
             </div>
         </div>
-        <div class="mui-row">
-            <div class="mui-col-md-12 mui--text-center">
-                <button type="button" class="mui-btn mui-btn--primary" onclick="calculateTime('add')"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                <button type="button" class="mui-btn mui-btn--danger" onclick="calculateTime('subtract')"><i class="fa fa-minus" aria-hidden="true"></i></button>
-            </div>
-        </div>
-        <div class="mui-row">
+        <div class="row">
             <h1 class="mui--text-center">Total time:</h1>
             <h2 class="mui--text-center">
                 <span id="totalHours">00</span> hs :
@@ -85,9 +44,9 @@
             </h2>
             <div class="mui--text-center" id="previousInputs"></div>
         </div>
-    </div>
+    </div>    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script> 
     <script type="text/javascript" src="js/index.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />
-   <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" /> -->
 </body>
 </html>

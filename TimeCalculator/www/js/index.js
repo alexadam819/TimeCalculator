@@ -47,9 +47,7 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
 app.initialize();
-
 /*
 window.onload = function () {
     var seconds = document.getElementById("secondsDD");
@@ -74,30 +72,29 @@ window.onload = function () {
     }
 }
 */
-
 var globalSeconds = 0;
-
 function calculateTime(operation) {
     var seconds = document.getElementById("secondsDD").value;
     var minutes = document.getElementById("minutesDD").value;
     var hours = document.getElementById("hoursDD").value;
-    (seconds === "") ? seconds = 0 : seconds = seconds; 
-    (minutes === "") ? minutes = 0 : minutes * 60;
-    (hours === "") ? hours = 0 : (hours * 60) * 60;
-    
     var operator = "+";
     var globalHolder = globalSeconds;
-
-    if (operation === "add"){
+    var timeString = '<p>' + operator + ' ' + document.getElementById("hoursDD").value + ' hrs : ' + document.getElementById("minutesDD").value + ' mins : ' + document.getElementById("secondsDD").value + ' secs</p>';
+    console.log(timeString);
+    (seconds === "") ? seconds = 0 : seconds = seconds; 
+    (minutes === "") ? minutes = 0 : minutes = minutes * 60;
+    (hours === "") ? hours = 0 : hours = (hours * 60) * 60;
+    
+    if (operation === "add") {
         globalHolder += (+seconds) + (+minutes) + (+hours);
     } else{
         globalHolder -= ((+seconds) + (+minutes) + (+hours));
         operator = "-"
     }
-    
-    if(globalHolder < 0){
+
+    if (globalHolder < 0) {
         alert("No such thing as negative time!");
-    }else{
+    } else{
         globalSeconds = globalHolder;
         var totalSeconds = globalSeconds % 60;
         var totalHours = Math.floor(globalSeconds / 3600);
@@ -106,13 +103,10 @@ function calculateTime(operation) {
         document.getElementById("totalHours").textContent = totalHours;
         document.getElementById("totalMinutes").textContent = totalMinutes;
         document.getElementById("totalSeconds").textContent = totalSeconds;
-
-        var timeString = '<p>' + operator + ' ' + hours + 'hrs : ' + minutes + 'mins : ' + seconds + 'secs</p>';
         document.getElementById("previousInputs").innerHTML += timeString;
     }
+
     document.getElementById("secondsDD").value = "";
     document.getElementById("minutesDD").value = "";
     document.getElementById("hoursDD").value = "";
-    
-
 };
